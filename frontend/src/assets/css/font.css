@@ -1,0 +1,64 @@
+/* src/styles/fonts.css */
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nicky Sans";
+  src: url("/fonts/NickySans/NickySans-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to Payment</title>
+</head>
+<body onload="document.forms[0].submit()">
+  <h2>Please wait... Redirecting to payment page</h2>
+
+  <form method="POST" action="https://api.authorize.net/payment/payment">
+    <input type="hidden" name="token" value="<%= token %>" />
+    <noscript>
+      <button type="submit">Click here to proceed to payment</button>
+    </noscript>
+  </form>
+</body>
+</html>

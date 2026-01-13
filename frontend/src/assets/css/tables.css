@@ -1,0 +1,319 @@
+/* data-table.css */
+/* Tailwind compile hoga: make sure dark mode 'class' par ho (tailwind.config.js -> darkMode:'class') */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Theme tokens (CSS vars) ---------- */
+:root {
+  --dt-bg1: theme(colors.slate.50);
+  --dt-bg2: theme(colors.slate.100);
+  --dt-card: rgba(1, 1, 1, 0.65);
+  --dt-text: theme(colors.slate.700);
+  --dt-text-muted: theme(colors.slate.500);
+  --dt-border: theme(colors.slate.200);
+  --dt-accent: theme(colors.indigo.600);
+  --dt-accent-2: theme(colors.sky.500);
+  --dt-row-hover: theme(colors.slate.50);
+  --dt-row-zebra: theme(colors.slate.100);
+  --dt-shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
+}
+
+.dark {
+  --dt-bg1: theme(colors.slate.950);
+  --dt-bg2: theme(colors.slate.900);
+  --dt-card: rgba(2, 6, 23, 0.55);
+  --dt-text: theme(colors.slate.200);
+  --dt-text-muted: theme(colors.slate.400);
+  --dt-border: theme(colors.slate.800);
+  --dt-accent: theme(colors.indigo.400);
+  --dt-accent-2: theme(colors.sky.400);
+  --dt-row-hover: rgba(148, 163, 184, 0.06);
+  --dt-row-zebra: rgba(148, 163, 184, 0.04);
+  --dt-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Outer wrapper (tumhari <div class="datatables">) ---------- */
+/* .datatables {
+  @apply relative overflow-hidden rounded-2xl border backdrop-blur;
+  @apply border-[var(--dt-border)];
+  box-shadow: var(--dt-shadow);
+  background:
+    radial-gradient(1200px 400px at -10% -10%, var(--dt-bg1) 0%, transparent 60%),
+    radial-gradient(1000px 500px at 120% 10%, var(--dt-accent-2) 0%, transparent 35%),
+    linear-gradient(135deg, var(--dt-bg1) 0%, var(--dt-bg2) 60%);
+} */
+
+/* .datatables {
+  @apply relative overflow-hidden rounded-2xl border backdrop-blur;
+  @apply border-[var(--dt-border)];
+  box-shadow: var(--dt-shadow);
+  padding: 16px;                 
+  background: transparent;       
+} */
+
+/* .datatables::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 400px at -10% -10%, var(--dt-bg1) 0%, transparent 60%),
+    radial-gradient(900px 480px at 120% 15%, color-mix(in oklab, var(--dt-accent-2) 45%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, var(--dt-bg1) 0%, var(--dt-bg2) 70%);
+} */
+
+/* keep table/card above the gradient */
+
+/* .datatables > * { position: relative; z-index: 1; } */
+
+/* subtle glass for the card so gradient shines through */
+.datatables .mantine-DataTable-root {
+  @apply border overflow-hidden;
+  @apply border-[var(--dt-border)];
+  background: color-mix(in oklab, var(--dt-card) 88%, transparent);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+}
+
+.mantine-datatable {
+  @apply rounded-lg
+}
+
+/* a little more contrast in dark mode */
+.dark {
+  --dt-bg1: theme(colors.slate.950);
+  --dt-bg2: #0c1222;
+  /* slightly bluer to separate from bg1 */
+  --dt-card: rgba(2, 6, 23, 0.55);
+}
+
+/* sticky header fallback for browsers without color-mix */
+@supports not (background: color-mix(in oklab, black 10%, transparent)) {
+  .datatables thead tr th {
+    background: var(--dt-card);
+  }
+}
+
+
+
+/* subtle inner glass card for table area */
+/* .datatables .mantine-DataTable-root {
+  @apply rounded-xl border;
+  @apply border-[var(--dt-border)] overflow-hidden;
+  background: var(--dt-card);
+  padding: 20px;
+} */
+
+/* ---------- Table base ---------- */
+.datatables table {
+  @apply w-full text-sm;
+  color: var(--dt-text);
+}
+
+.datatables thead th,
+.datatables tbody td {
+  @apply px-4 py-3 align-middle;
+}
+
+/* sticky + glass header */
+.datatables thead tr th {
+  @apply sticky top-0 z-10 font-semibold tracking-wide select-none;
+  backdrop-filter: blur(8px);
+  /* background: color-mix(in oklab, var(--dt-card) 85%, transparent); */
+  border-bottom: 1px solid var(--dt-border);
+}
+
+/* sort icon tint (Mantine adds an icon element) */
+.datatables thead th .mantine-DataTable-sort-icon {
+  @apply inline-block transition-transform duration-200;
+  color: var(--dt-accent);
+}
+
+.datatables thead th[data-sorted="true"] .mantine-DataTable-sort-icon {
+  @apply rotate-180;
+}
+
+/* zebra rows + hover */
+
+/* .datatables tbody tr:nth-child(even) td {
+  background: var(--dt-row-zebra);
+} */
+
+/* .datatables tbody {
+   background:
+    radial-gradient(1200px 400px at -10% -10%, var(--dt-bg1) 0%, transparent 60%),
+    radial-gradient(900px 480px at 120% 15%, color-mix(in oklab, var(--dt-accent-2) 45%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, var(--dt-bg1) 0%, var(--dt-bg2) 70%);
+} */
+
+
+.datatables tbody tr:hover td {
+  /* transition: background-color .2s ease, transform .2s ease; */
+  /* transform: translateY(-1px); */
+  /* background: var(--dt-row-hover); */
+}
+
+/* row highlight already from your rowStyle (isNew) — enhance with border glow */
+.datatables tbody tr[style*="fee2e2"] td {
+  box-shadow: inset 0 0 0 9999px rgba(248, 113, 113, .18);
+}
+
+/* rounded corners first/last cells */
+.datatables thead th:first-child,
+.datatables tbody td:first-child {
+  @apply pl-5;
+}
+
+.datatables thead th:last-child,
+.datatables tbody td:last-child {
+  @apply pr-5;
+}
+
+.datatables thead tr:first-child th:first-child {
+  @apply rounded-tl-2xl;
+}
+
+.datatables thead tr:first-child th:last-child {
+  @apply rounded-tr-2xl;
+}
+
+.datatables tbody tr:last-child td:first-child {
+  @apply rounded-bl-xl;
+}
+
+.datatables tbody tr:last-child td:last-child {
+  @apply rounded-br-xl;
+}
+
+/* clickable row cursor */
+.datatables .mantine-DataTable-row {
+  @apply cursor-pointer;
+}
+
+/* ---------- Footer / pagination bar ---------- */
+.datatables .mantine-DataTable-footer {
+  @apply flex flex-wrap items-center gap-3 md:gap-4 justify-between p-3 md:p-4 border-t;
+  @apply border-[var(--dt-border)];
+  background: color-mix(in oklab, var(--dt-card) 90%, transparent);
+}
+
+/* "Showing X to Y..." text */
+.datatables .mantine-DataTable-pagination-text {
+  @apply text-xs md:text-sm font-medium;
+  color: var(--dt-text-muted);
+}
+
+/* Mantine Pagination */
+.datatables .mantine-Pagination-root {
+  @apply flex items-center gap-2;
+}
+
+.datatables .mantine-Pagination-control {
+  @apply h-9 min-w-9 px-3 rounded-full border transition disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply border-[var(--dt-border)] bg-white/70 dark:bg-slate-900/60;
+  color: var(--dt-text);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
+}
+
+.datatables .mantine-Pagination-control:hover {
+  @apply shadow-md;
+  transform: translateY(-1px);
+}
+
+.datatables .mantine-Pagination-control[data-active="true"] {
+  @apply font-semibold shadow-md bg-primary;
+  /* background:
+    radial-gradient(80% 100% at 50% 0%, color-mix(in oklab, var(--dt-accent) 45%, transparent) 0%, transparent 70%),
+    linear-gradient(135deg, color-mix(in oklab, var(--dt-accent) 92%, var(--dt-accent-2)) 0%, var(--dt-accent-2) 100%); */
+  color: white;
+  border-color: transparent;
+}
+
+/* Prev/Next icons */
+.datatables .mantine-Pagination-control svg {
+  @apply w-4 h-4;
+}
+
+/* Records-per-page Select (Mantine Select inside footer) */
+.datatables .mantine-Select-input,
+.datatables .mantine-Input-input {
+  @apply h-9 rounded-lg border px-3 text-sm transition;
+  @apply border-[var(--dt-border)] bg-white/70 dark:bg-slate-900/60;
+  color: var(--dt-text);
+}
+
+.datatables .mantine-Select-input:focus,
+.datatables .mantine-Input-input:focus {
+  @apply ring-2 ring-offset-0 outline-none;
+  --tw-ring-color: color-mix(in oklab, var(--dt-accent) 65%, transparent);
+}
+
+/* Loader blur that Mantine DataTable adds */
+.datatables .mantine-DataTable-loader {
+  @apply backdrop-blur-sm;
+}
+
+/* Row hover accent border on the far left (subtle) */
+.datatables tbody tr:hover td:first-child {
+  box-shadow: inset 2px 0 0 0 color-mix(in oklab, var(--dt-accent) 55%, transparent);
+}
+
+/* Optional helper if you still use this class in JSX */
+
+.datatables .table-hover tbody {
+  /* @apply bg-red-50;  */
+  /* background:
+    radial-gradient(1200px 400px at -10% -10%, var(--dt-bg1) 0%, transparent 60%),
+    radial-gradient(900px 480px at 120% 15%, color-mix(in oklab, var(--dt-accent-2) 45%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, var(--dt-bg1) 0%, var(--dt-bg2) 70%);; */
+}
+
+.datatables .table-hover tbody tr:hover td {
+  /* keep legacy helper */
+  @apply dark:bg-black;
+  /* background: var(--dt-row-hover); */
+}
+
+.mantine-datatable-pagination {
+  @apply dark:bg-black dark:text-dark-light bg-black-light
+}
+
+.datatables .table-hover tbody {
+  @apply dark:bg-black bg-white;
+}
+
+.datatables .table-hover tbody td {
+  @apply dark:bg-black bg-white
+}
+
+.mantine-datatable {
+  @apply dark:!bg-black bg-white;
+}
+
+/* default (light) */
+.mantine-datatable {
+  --mantine-datatable-background-color: #ffff;
+}
+
+/* dark mode when parent has .dark */
+.dark .mantine-datatable {
+  --mantine-datatable-background-color: #0c1222;
+}
+
+/* .mantine-datatable.dark {
+  --mantine-datatable-background-color: #0c1222;
+} */
+
+.mantine-datatable-header-cell-sortable:hover:not(:has(button:hover)) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(26 41 65 / var(--tw-bg-opacity, 1)) !important;
+}
+
+
+[dir='rtl'] .datatables .mantine-ScrollArea-root.m_d57069b5 {
+  direction: rtl;
+}
+.mantine-ScrollArea-viewport>div:first-child>div {
+  @apply bg-none;
+}
