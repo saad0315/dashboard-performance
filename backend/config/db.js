@@ -1,26 +1,4 @@
-// const mongoose = require("mongoose");
 
-// const con = () => {
-//   mongoose.set("strictQuery", true);
-//   // mongoose.connect('mongodb+srv://saif:deltacom@cluster0.l2nnmnu.mongodb.net/internalPortal').then((data)=>{
-//   mongoose
-//     .connect(
-//       "mongodb+srv://saif:saif1234@cluster0.fooju1w.mongodb.net/sales-dashboard",
-//     )
-//     .then((data) => {
-//     // .connect(
-//     //   "mongodb://localhost:27017/sales",
-//     // )
-//     // .then((data) => {
-//       console.log(`MongoDB connected with Server Host ${data.connection.host}`);
-//       // mongoose.connection.db.collection('chats').createIndex({ conversationId: 1 }).then(()=>{
-//       //     console.log("Indexes created successfully");
-
-//       // })
-//     });
-// };
-
-// module.exports = con;
 
 const mongoose = require("mongoose");
 
@@ -29,8 +7,7 @@ const connectDatabases = () => {
 
   // Connect to the first database (sales-dashboard)
   const db1 = mongoose.createConnection(
-    "mongodb+srv://saif:saif1234@cluster0.fooju1w.mongodb.net/ebook-sales-v3"
-    // "mongodb://localhost:27017/ebook-sales-dashboard"
+    "mongodb://localhost:27017/ebook-sales-dashboard"
   );
 
   db1.on("connected", () => {
@@ -43,7 +20,7 @@ const connectDatabases = () => {
 
   // Connect to the second database (signup-forms)
   const db2 = mongoose.createConnection(
-    "mongodb+srv://saif:saif1234@cluster0.fooju1w.mongodb.net/signup-forms"
+    "mongodb://localhost:27017/signup-forms"
   );
 
   db2.on("connected", () => {

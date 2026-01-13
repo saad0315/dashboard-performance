@@ -4,181 +4,11 @@ var ApiContracts = require("authorizenet").APIContracts;
 var ApiControllers = require("authorizenet").APIControllers;
 require("dotenv").config();
 
-// function chargeCreditCard(paymentDetails, callback) {
-//   var merchantAuthenticationType =
-//     new ApiContracts.MerchantAuthenticationType();
-//   merchantAuthenticationType.setName("2DE9nu2p6");
-//   merchantAuthenticationType.setTransactionKey("59MNhDT5gXb29236");
-
-//   var creditCard = new ApiContracts.CreditCardType();
-//   creditCard.setCardNumber(paymentDetails?.creditCardNumber);
-//   creditCard.setExpirationDate(paymentDetails?.expirationDate);
-//   creditCard.setCardCode(paymentDetails?.cardCode);
-
-//   var paymentType = new ApiContracts.PaymentType();
-//   paymentType.setCreditCard(creditCard);
-
-//   var orderDetails = new ApiContracts.OrderType();
-//   orderDetails.setInvoiceNumber(paymentDetails?.invoiceNumber);
-//   orderDetails.setDescription(paymentDetails?.project?.projectName);
-
-//   var billTo = new ApiContracts.CustomerAddressType();
-//   billTo.setFirstName("Mr/Mrs");
-//   billTo.setLastName(paymentDetails?.name);
-//   billTo.setCompany("Bellevue Publishers");
-//   billTo.setAddress(paymentDetails?.billTo?.address);
-//   billTo.setCity(paymentDetails?.billTo?.city);
-//   billTo.setState(paymentDetails?.billTo?.state);
-//   billTo.setZip(paymentDetails?.billTo?.zip);
-//   billTo.setCountry(paymentDetails?.billTo?.country);
-
-//   var userField_a = new ApiContracts.UserField();
-//   userField_a.setName("Company Name");
-//   userField_a.setValue("Bellevue Publishers");
-
-//   var userField_b = new ApiContracts.UserField();
-//   userField_b.setName("Customer Name");
-//   userField_b.setValue(paymentDetails?.customer?.userName);
-
-//   var userFieldList = [];
-//   userFieldList.push(userField_a);
-//   userFieldList.push(userField_b);
-
-//   var userFields = new ApiContracts.TransactionRequestType.UserFields();
-//   userFields.setUserField(userFieldList);
-
-//   var transactionSetting1 = new ApiContracts.SettingType();
-//   transactionSetting1.setSettingName("duplicateWindow");
-//   transactionSetting1.setSettingValue("120");
-//   var transactionSettingList = [];
-//   transactionSettingList.push(transactionSetting1);
-//   var transactionSettings = new ApiContracts.ArrayOfSetting();
-//   transactionSettings.setSetting(transactionSettingList);
-
-//   var transactionRequestType = new ApiContracts.TransactionRequestType();
-//   transactionRequestType.setTransactionType(
-//     ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION
-//   );
-//   transactionRequestType.setPayment(paymentType);
-//   transactionRequestType.setAmount(paymentDetails.paidToDate);
-//   transactionRequestType.setUserFields(userFields);
-//   transactionRequestType.setOrder(orderDetails);
-//   transactionRequestType.setBillTo(billTo);
-//   transactionRequestType.setTransactionSettings(transactionSettings);
-//   var createRequest = new ApiContracts.CreateTransactionRequest();
-//   createRequest.setMerchantAuthentication(merchantAuthenticationType);
-//   createRequest.setTransactionRequest(transactionRequestType);
-//   //pretty print request
-//   console.log(JSON.stringify(createRequest.getJSON(), null, 2));
-//   var ctrl = new ApiControllers.CreateTransactionController(
-//     createRequest.getJSON()
-//   );
-
-//   ctrl.execute(function () {
-//     var apiResponse = ctrl.getResponse();
-
-//     var response = new ApiContracts.CreateTransactionResponse(apiResponse);
-
-//     //pretty print response
-//     console.log(JSON.stringify(response, null, 2));
-
-//     if (response != null) {
-//       if (
-//         response.getMessages().getResultCode() ==
-//         ApiContracts.MessageTypeEnum.OK
-//       ) {
-//         if (response.getTransactionResponse().getMessages() != null) {
-//           console.log(
-//             "Successfully created transaction with Transaction ID: " +
-//             response.getTransactionResponse().getTransId()
-//           );
-//           console.log(
-//             "Response Code: " +
-//             response.getTransactionResponse().getResponseCode()
-//           );
-//           console.log(
-//             "Message Code: " +
-//             response
-//               .getTransactionResponse()
-//               .getMessages()
-//               .getMessage()[0]
-//               .getCode()
-//           );
-//           console.log(
-//             "Description: " +
-//             response
-//               .getTransactionResponse()
-//               .getMessages()
-//               .getMessage()[0]
-//               .getDescription()
-//           );
-//         } else {
-//           console.log("Failed Transaction.");
-//           if (response.getTransactionResponse().getErrors() != null) {
-//             console.log(
-//               "Error Code: " +
-//               response
-//                 .getTransactionResponse()
-//                 .getErrors()
-//                 .getError()[0]
-//                 .getErrorCode()
-//             );
-//             console.log(
-//               "Error message: " +
-//               response
-//                 .getTransactionResponse()
-//                 .getErrors()
-//                 .getError()[0]
-//                 .getErrorText()
-//             );
-//           }
-//         }
-//       } else {
-//         console.log("Failed Transaction. ");
-//         if (
-//           response.getTransactionResponse() != null &&
-//           response.getTransactionResponse().getErrors() != null
-//         ) {
-//           console.log(
-//             "Error Code: " +
-//             response
-//               .getTransactionResponse()
-//               .getErrors()
-//               .getError()[0]
-//               .getErrorCode()
-//           );
-//           console.log(
-//             "Error message: " +
-//             response
-//               .getTransactionResponse()
-//               .getErrors()
-//               .getError()[0]
-//               .getErrorText()
-//           );
-//         } else {
-//           console.log(
-//             "Error Code: " + response.getMessages().getMessage()[0].getCode()
-//           );
-//           console.log(
-//             "Error message: " + response.getMessages().getMessage()[0].getText()
-//           );
-//         }
-//       }
-//     } else {
-//       console.log("Null Response.");
-//     }
-
-//     callback(response);
-//   });
-// }
-
 function chargeCreditCard(paymentDetails, callback) {
   const merchantAuthenticationType =
     new ApiContracts.MerchantAuthenticationType();
-  merchantAuthenticationType.setName("8FRN32psd8");
-  merchantAuthenticationType.setTransactionKey("4JyqKK92Bk8ub42e");
-  // merchantAuthenticationType.setName("96YuAe2ey");
-  // merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
+  merchantAuthenticationType.setName("96YuAe2ey");
+  merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
 
   // ✅ Use opaqueData instead of raw card info
   const opaqueData = new ApiContracts.OpaqueDataType();
@@ -236,8 +66,6 @@ function chargeCreditCard(paymentDetails, callback) {
   const ctrl = new ApiControllers.CreateTransactionController(
     createRequest.getJSON()
   );
-  ctrl.setEnvironment("https://api2.authorize.net/xml/v1/request.api");
-
   ctrl.execute(() => {
     const apiResponse = ctrl.getResponse();
     const response = new ApiContracts.CreateTransactionResponse(apiResponse);
@@ -250,10 +78,8 @@ function chargeCreditCard(paymentDetails, callback) {
 function getTransactionDetails(transactionId, callback) {
   var merchantAuthenticationType =
     new ApiContracts.MerchantAuthenticationType();
-  merchantAuthenticationType.setName("8FRN32psd8");
-  merchantAuthenticationType.setTransactionKey("4JyqKK92Bk8ub42e");
-  // merchantAuthenticationType.setName("96YuAe2ey");
-  // merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
+  merchantAuthenticationType.setName("96YuAe2ey");
+  merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
 
   var getRequest = new ApiContracts.GetTransactionDetailsRequest();
   getRequest.setMerchantAuthentication(merchantAuthenticationType);
@@ -305,14 +131,12 @@ function getTransactionDetails(transactionId, callback) {
     callback(response);
   });
 }
-// merchantAuthenticationType.setName("96YuAe2ey");
-// merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
 
 function capturePreviouslyAuthorizedAmount(transactionId, callback) {
   var merchantAuthenticationType =
     new ApiContracts.MerchantAuthenticationType();
-  merchantAuthenticationType.setName("8FRN32psd8");
-  merchantAuthenticationType.setTransactionKey("4JyqKK92Bk8ub42e");
+  merchantAuthenticationType.setName("96YuAe2ey");
+  merchantAuthenticationType.setTransactionKey("46GKpx86vdQs4877");
 
   var orderDetails = new ApiContracts.OrderType();
   orderDetails.setInvoiceNumber(transactionId.invoice.invoiceNumber);
